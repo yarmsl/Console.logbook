@@ -1,7 +1,6 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import Header from '../components/Header';
 import { Container, makeStyles } from '@material-ui/core';
-import { Child } from '../types/types';
 import Footer from '../components/Footer';
 
 const useStyles = makeStyles(() => ({
@@ -17,7 +16,7 @@ const useStyles = makeStyles(() => ({
 	}
 }));
 
-const MainLayout = ({ children }: Child): React.ReactElement => {
+const MainLayout = ({ children }: Child): ReactElement => {
 	const classes = useStyles();
 	return (
 		<>

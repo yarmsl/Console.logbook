@@ -1,8 +1,12 @@
 import { Theme, ThemeProvider } from '@material-ui/core';
-import React, { ReactElement, useContext, useReducer, createContext } from 'react';
-import { LDTheme, Child, ThemeCtx } from '../../types/types';
+import { ReactElement, useContext, useReducer, createContext } from 'react';
 import lightTheme from '../../UI/lightTheme';
 import darkTheme from '../../UI/darkTheme';
+
+interface ThemeCtx {
+	theme?: Theme;
+	switchTheme: (str: 'light' | 'dark') => void;
+}
 
 const ThemeCTX = createContext({} as ThemeCtx );
 

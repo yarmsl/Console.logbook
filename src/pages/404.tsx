@@ -1,7 +1,6 @@
-import React, { ReactElement } from 'react';
 import { Container } from '@material-ui/core';
 
-const NotFound = (): ReactElement => {
+const NotFound = (): JSX.Element => {
 	return (
 		<Container>
 			404

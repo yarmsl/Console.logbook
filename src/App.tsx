@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { useRoutes } from "./Routes";
 import MainLayout from "./layouts/MainLayout";
 import { CssBaseline } from "@material-ui/core";

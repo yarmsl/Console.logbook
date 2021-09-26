@@ -1,9 +1,9 @@
-import React from 'react';
+import { MouseEventHandler } from 'react';
 import { Fab, makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 export interface FabProps {
-	onClick: React.MouseEventHandler<HTMLButtonElement>;
+	onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 const useStyles = makeStyles(() => ({

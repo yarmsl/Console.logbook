@@ -1,4 +1,4 @@
-import React, { ReactElement, MouseEvent, useState } from "react";
+import { MouseEvent, useState } from "react";
 import {
   AppBar,
   Avatar,
@@ -36,13 +36,11 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 }));
 
-const Header = (): ReactElement => {
+const Header = (): JSX.Element => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { logout, isAuth, userId } = useAuthCtx();
-  console.log(userId);
   const router = useHistory();
-  console.log(useHistory());
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };

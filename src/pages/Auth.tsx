@@ -1,10 +1,9 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Box, Container, TextField, makeStyles, ButtonGroup, Button, Typography } from '@material-ui/core';
 import Snack, { SnackProps } from '../UI/Snack';
 import HelmetLayout from '../layouts/HelmetLayout';
 import { useHttp } from '../lib/hooks/http.hook';
-import { formLogin, badResponse, authData } from '../types/types';
 import { useAuthCtx } from '../lib/context/AuthCTX';
 
 const useStyles = makeStyles(() => ({

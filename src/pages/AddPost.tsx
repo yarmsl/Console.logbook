@@ -1,15 +1,10 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Box, Button, Container, makeStyles, TextField } from '@material-ui/core';
 import HelmetLayout from '../layouts/HelmetLayout';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import { useHttp } from '../lib/hooks/http.hook';
 import { useAuthCtx } from '../lib/context/AuthCTX';
-
-export interface postProps {
-	title: string;
-	text: string;
-}
 
 const useStyles = makeStyles(() => ({
 	form: {

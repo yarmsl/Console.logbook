@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from 'react';
-import { authData, useAuthTypes } from '../../types/types';
 
 const storeName = 'userData';
 

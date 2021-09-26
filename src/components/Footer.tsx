@@ -1,4 +1,3 @@
-import React, { ReactElement } from 'react';
 import { Box, Container, IconButton, makeStyles, Typography } from '@material-ui/core';
 import TelegramIcon from '@material-ui/icons/Telegram';
 
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const Footer = (): ReactElement => {
+const Footer = (): JSX.Element => {
 
 	const classes = useStyles();
 

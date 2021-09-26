@@ -1,6 +1,4 @@
 import { useState, useCallback } from "react";
-import { postProps } from "../../pages/AddPost";
-import { badResponse, formLogin, useHttpTypes } from "../../types/types";
 import { SERVER_URL } from "../constants";
 
 export const useHttp = (): useHttpTypes => {
