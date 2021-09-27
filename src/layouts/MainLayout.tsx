@@ -2,6 +2,8 @@ import { ReactElement } from 'react';
 import Header from '../components/Header';
 import { Container, makeStyles } from '@material-ui/core';
 import Footer from '../components/Footer';
+import Snack from '../UI/Snack';
+import { useAppSelector } from '../lib/hooks/redux.hooks';
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -18,6 +20,7 @@ const useStyles = makeStyles(() => ({
 
 const MainLayout = ({ children }: Child): ReactElement => {
 	const classes = useStyles();
+	const snackBar = useAppSelector(state => state.snackBar)
 	return (
 		<>
 			<Header />
@@ -26,6 +29,7 @@ const MainLayout = ({ children }: Child): ReactElement => {
 					{children}
 				</>
 			</Container>
+			<Snack {...snackBar} />
 			<Footer/>
 		</>
 	);
