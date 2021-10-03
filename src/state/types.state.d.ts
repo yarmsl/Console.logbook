@@ -1,6 +1,7 @@
 //AuthReducer
 interface AuthModel {
   isAuth: boolean;
+  isLoading: boolean;
   token?: string;
   error?: AuthError;
 }
@@ -9,18 +10,27 @@ interface signData {
   password?: string;
 }
 
-interface AuthError {
-  validate?: signData;
-  server?: string;
-  signUp?: string;
-  signIn?: signData;
-}
-
 interface AuthActions {
   type: string;
   token?: string;
   error?: AuthError;
 }
+
+type AuthError =
+  | "incorrect email"
+  | "min password length 6"
+  | "invalid data"
+  | "user exists"
+  | "signup error"
+  | "enter correct email"
+  | "enter pass"
+  | "user not found"
+  | "password is incorrect"
+  | "signin error"
+  | "no local token"
+  | "no auth"
+  | "checkauth error"
+  | "Failed to fetch";
 
 //PostsReducer
 interface PostModel {
@@ -28,7 +38,7 @@ interface PostModel {
   date: Date;
   text: string;
   title: string;
-  _id: string;
+  id: string;
 }
 
 interface PostActions {
@@ -37,20 +47,28 @@ interface PostActions {
 }
 
 //snackBarReducer
-interface snackBarModel {
-	open: boolean,
-	type: 'alert' | 'success' | 'warning' | undefined,
-	message: string,
+interface snackbarObj {
+	type: "alert" | "success" | "warning" | undefined;
+	message: string;
+}
+
+interface snackBarModel extends snackbarObj {
+  open: boolean;
 }
 
 interface snackBarActions {
-	type: string;
-	snackBar?: snackBarModel;
+  type: string;
+  snackBar?: snackbarObj;
 }
 
-interface rootReducer {
-	auth: authModel;
-	user: string;
-	posts: PostModel[];
-	snackBar: snackBarModel;
+//userReducer
+interface userModel {
+  id: string;
+  name: string;
+  avatar: string;
+}
+
+interface userActions {
+  type: string;
+  payload?: userModel;
 }

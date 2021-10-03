@@ -13,8 +13,10 @@ import {
 } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
-import { useAuthCtx } from "../lib/context/AuthCTX";
 import { useHistory, Link } from "react-router-dom";
+import { useAppSelector } from "../lib/hooks/redux.hooks";
+import { useDispatch } from "react-redux";
+import { signOut } from "../state/actions/authActions";
 
 const useStyles = makeStyles(({ palette }) => ({
   header: {
@@ -38,9 +40,13 @@ const useStyles = makeStyles(({ palette }) => ({
 
 const Header = (): JSX.Element => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { logout, isAuth, userId } = useAuthCtx();
+  const {isAuth} = useAppSelector(state => state.auth)
+  const {id} = useAppSelector(state => state.user);
+
   const router = useHistory();
+
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -73,14 +79,14 @@ const Header = (): JSX.Element => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={() => router.push(`/profile/${userId}`)}>
+                <MenuItem onClick={() => router.push(`/profile/${id}`)}>
                   <PersonIcon />
                   <Typography className={classes.menuTitle}>Profile</Typography>
                 </MenuItem>
                 <Divider />
                 <MenuItem
                   onClick={() => {
-                    logout();
+                    dispatch(signOut())
                     handleClose();
                   }}
                 >

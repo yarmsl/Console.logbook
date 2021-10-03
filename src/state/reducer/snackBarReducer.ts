@@ -9,7 +9,7 @@ const initState: snackBarModel = {
 const snackBarReducer = (state = initState, action: snackBarActions): snackBarModel => {
   switch (action.type) {
     case OPEN_SNACKBAR:
-      return action.snackBar || state;
+      return {...state, open: true, ...action.snackBar};
 	case RESET_SNACKBAR: 
 		return initState;
     default:

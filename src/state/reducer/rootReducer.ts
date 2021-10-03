@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import postsReducer from './postsReducer';
-import snackBarReducer from './uiReducer';
+import snackBarReducer from './snackBarReducer';
 import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
