@@ -12,8 +12,7 @@ import {
 } from "@material-ui/core";
 import HelmetLayout from "../layouts/HelmetLayout";
 import { signIn, signUp } from "../state/actions/authActions";
-import { useDispatch } from "react-redux";
-import { useAppSelector } from "../lib/hooks/redux.hooks";
+import { useAppDispatch, useAppSelector } from "../lib/hooks/redux.hooks";
 import { OPEN_SNACKBAR } from "../lib/constants";
 
 const useStyles = makeStyles(() => ({
@@ -42,7 +41,7 @@ const useStyles = makeStyles(() => ({
 
 const Auth = (): ReactElement => {
   const { handleSubmit, control, setError, clearErrors } = useForm<formLogin>();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { isLoading, error } = useAppSelector((st) => st.auth);
   const classes = useStyles();
 

@@ -33,6 +33,13 @@ type AuthError =
   | "Failed to fetch";
 
 //PostsReducer
+
+interface PostsReducer {
+  isLoading: boolean;
+  error?: PostsError;
+  posts: PostModel[];
+}
+
 interface PostModel {
   author: string;
   date: Date;
@@ -43,13 +50,23 @@ interface PostModel {
 
 interface PostActions {
   type: string;
-  posts: PostModel[];
+  post?: PostModel; 
+  posts?: PostModel[];
+  error?: PostsError;
+  postId?: string;
 }
+
+type PostsError =
+  | "publish error"
+  | "get posts error"
+  | "get post error"
+  | "no auth"
+  | "Failed to fetch";
 
 //snackBarReducer
 interface snackbarObj {
-	type: "alert" | "success" | "warning" | undefined;
-	message: string;
+  type: "alert" | "success" | "warning" | undefined;
+  message: string;
 }
 
 interface snackBarModel extends snackbarObj {

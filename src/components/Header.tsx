@@ -14,8 +14,7 @@ import {
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import { useHistory, Link } from "react-router-dom";
-import { useAppSelector } from "../lib/hooks/redux.hooks";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../lib/hooks/redux.hooks";
 import { signOut } from "../state/actions/authActions";
 
 const useStyles = makeStyles(({ palette }) => ({
@@ -40,10 +39,10 @@ const useStyles = makeStyles(({ palette }) => ({
 
 const Header = (): JSX.Element => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const {isAuth} = useAppSelector(state => state.auth)
-  const {id} = useAppSelector(state => state.user);
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
+  const id = useAppSelector((state) => state.user.id);
 
   const router = useHistory();
 
@@ -57,7 +56,7 @@ const Header = (): JSX.Element => {
   return (
     <AppBar position="sticky">
       <Container className={classes.header}>
-        <MUILink component={Link} to={'/'}>
+        <MUILink component={Link} to={"/"}>
           <Typography variant="h5" component="h1" className={classes.logo}>
             Console.logbook(&apos;123&apos;)
           </Typography>
@@ -67,8 +66,7 @@ const Header = (): JSX.Element => {
             <IconButton
               aria-controls="simple-menu"
               aria-haspopup="true"
-              onClick={handleClick}
-            >
+              onClick={handleClick}>
               <Avatar className={classes.avatar}></Avatar>
             </IconButton>
             <>
@@ -77,19 +75,19 @@ const Header = (): JSX.Element => {
                 anchorEl={anchorEl}
                 keepMounted
                 open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={() => router.push(`/profile/${id}`)}>
+                onClose={handleClose}>
+                <MenuItem
+                  onClick={() => {
+                    router.push(`/profile/${id}`), handleClose();
+                  }}>
                   <PersonIcon />
                   <Typography className={classes.menuTitle}>Profile</Typography>
                 </MenuItem>
                 <Divider />
                 <MenuItem
                   onClick={() => {
-                    dispatch(signOut())
-                    handleClose();
-                  }}
-                >
+                    dispatch(signOut()), handleClose();
+                  }}>
                   <ExitToAppRoundedIcon />
                   <Typography className={classes.menuTitle}>Logout</Typography>
                 </MenuItem>

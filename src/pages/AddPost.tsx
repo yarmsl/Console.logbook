@@ -4,11 +4,14 @@ import {
   Box,
   Button,
   Container,
+  LinearProgress,
   makeStyles,
   TextField,
 } from "@material-ui/core";
 import HelmetLayout from "../layouts/HelmetLayout";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
+import { useAppDispatch, useAppSelector } from "../lib/hooks/redux.hooks";
+import { publishPost } from "../state/actions/postsActions";
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -16,27 +19,37 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    "&>*": {
-      marginBottom: "16px",
-    },
+  },
+  title: {
+    height: "80px",
   },
   textfield: {
+    minHeight: "250px",
     ["& fieldset"]: {
       borderTopLeftRadius: 0,
       borderTopRightRadius: 0,
     },
   },
+  loader: {
+    width: "100%",
+  },
   submit: {
     alignSelf: "flex-end",
+    margin: "8px 0",
   },
 }));
 
 const AddPost = (): ReactElement => {
   const { handleSubmit, control } = useForm<postProps>();
   const classes = useStyles();
-
-  const onSubmit = async (data: postProps) => {
+  const dispatch = useAppDispatch();
+  const token = useAppSelector((st) => st.auth.token);
+  const isLoading = useAppSelector((st) => st.posts.isLoading);
+  const onSubmit = (data: postProps) => {
     console.log(data);
+    if (token) {
+      dispatch(publishPost(data, token));
+    }
   };
 
   return (
@@ -52,6 +65,7 @@ const AddPost = (): ReactElement => {
             defaultValue=""
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <TextField
+                className={classes.title}
                 variant="filled"
                 color="secondary"
                 autoFocus
@@ -68,8 +82,8 @@ const AddPost = (): ReactElement => {
             rules={{
               required: "Enter Title",
               minLength: {
-                value: 10,
-                message: "min password length 10",
+                value: 5,
+                message: "min password length 5",
               },
             }}
           />
@@ -98,11 +112,14 @@ const AddPost = (): ReactElement => {
             rules={{
               required: "Enter log",
               minLength: {
-                value: 50,
-                message: "min log length 50",
+                value: 10,
+                message: "min log length 10",
               },
             }}
           />
+          {isLoading && (
+            <LinearProgress className={classes.loader} color="secondary" />
+          )}
           <Button
             className={classes.submit}
             type="submit"

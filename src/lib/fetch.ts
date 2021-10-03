@@ -16,13 +16,29 @@ export const postData = async (
 
 export const authGetData = async (
   url: string,
-  token: string,
+  token: string
 ): Promise<Response> => {
   const data = await fetch(`${SERVER_URL}${url}`, {
     method: "GET",
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
+  });
+  return data;
+};
+
+export const authPostData = async (
+  url: string,
+  token: string,
+  body: postProps,
+): Promise<Response> => {
+  const data = await fetch(`${SERVER_URL}${url}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
   });
   return data;
 };

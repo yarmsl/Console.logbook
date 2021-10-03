@@ -3,8 +3,8 @@ import { Box, makeStyles, Snackbar, Typography } from "@material-ui/core";
 import ErrorRoundedIcon from "@material-ui/icons/ErrorRounded";
 import ThumbUpAltRoundedIcon from "@material-ui/icons/ThumbUpAltRounded";
 import WarningRoundedIcon from "@material-ui/icons/WarningRounded";
-import { useDispatch } from "react-redux";
 import { RESET_SNACKBAR } from "../lib/constants";
+import { useAppDispatch } from "../lib/hooks/redux.hooks";
 
 export interface SnackProps {
   open: boolean;
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Snack = ({ open, type, message }: SnackProps): ReactElement => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Snackbar

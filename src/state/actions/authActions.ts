@@ -1,9 +1,9 @@
 import {
   AUTH_ERROR,
-  IS_LOAD_END,
-  IS_LOAD_ON,
+  AUTH_LOAD_END,
+  AUTH_LOAD_ON,
   OPEN_SNACKBAR,
-  RESET_ERROR,
+  RESET_AUTH_ERROR,
   RESET_USER,
   SET_USER,
   SIGN_IN,
@@ -17,8 +17,8 @@ export const signIn = (
   const authToApp = async (
     dispatch: (arg0: AuthActions | userActions) => void | AuthActions
   ) => {
-    dispatch({ type: RESET_ERROR });
-    dispatch({ type: IS_LOAD_ON });
+    dispatch({ type: RESET_AUTH_ERROR });
+    dispatch({ type: AUTH_LOAD_ON });
     try {
       const response = await postData("/api/auth/signin", data);
       const res = await response.json();
@@ -27,7 +27,7 @@ export const signIn = (
         dispatch({ type: SIGN_IN, token: token });
         localStorage.setItem("app", token);
         dispatch({ type: SET_USER, payload: { id, name, avatar } });
-        dispatch({ type: IS_LOAD_END });
+        dispatch({ type: AUTH_LOAD_END });
       } else {
         throw new Error(res.message);
       }
@@ -35,7 +35,7 @@ export const signIn = (
       if (e instanceof Error) {
         console.error("signIn Action Error");
         dispatch({ type: AUTH_ERROR, error: e.message as AuthError });
-        dispatch({ type: IS_LOAD_END });
+        dispatch({ type: AUTH_LOAD_END });
       }
     }
   };
@@ -52,8 +52,8 @@ export const signUp = (
       arg0: AuthActions | userActions | snackBarActions
     ) => void | AuthActions
   ) => {
-    dispatch({ type: RESET_ERROR });
-    dispatch({ type: IS_LOAD_ON });
+    dispatch({ type: RESET_AUTH_ERROR });
+    dispatch({ type: AUTH_LOAD_ON });
     try {
       const response = await postData("/api/auth/signup", data);
       const res = await response.json();
@@ -66,7 +66,7 @@ export const signUp = (
           type: OPEN_SNACKBAR,
           snackBar: { type: "success", message: "user created" },
         });
-        dispatch({ type: IS_LOAD_END });
+        dispatch({ type: AUTH_LOAD_END });
       } else {
         throw new Error(res.message);
       }
@@ -74,7 +74,7 @@ export const signUp = (
       if (e instanceof Error) {
         console.error("signUp Action Error");
         dispatch({ type: AUTH_ERROR, error: e.message as AuthError });
-        dispatch({ type: IS_LOAD_END });
+        dispatch({ type: AUTH_LOAD_END });
       }
     }
   };
@@ -89,21 +89,21 @@ export const signLocalToken = (): ((
   ) => {
     const token = localStorage.getItem("app");
     if (token != null) {
-      dispatch({ type: IS_LOAD_ON });
+      dispatch({ type: AUTH_LOAD_ON });
       try {
         const response = await authGetData("/api/auth/checkauth", token);
         const res = await response.json();
         if (response.ok) {
           dispatch({ type: SIGN_IN, token: token });
           dispatch({ type: SET_USER, payload: res });
-          dispatch({ type: IS_LOAD_END });
+          dispatch({ type: AUTH_LOAD_END });
         } else {
           throw new Error(res.message);
         }
       } catch (e) {
         if (e instanceof Error) {
           console.error("checkauth Action Error");
-          dispatch({ type: IS_LOAD_END });
+          dispatch({ type: AUTH_LOAD_END });
         }
       }
     }
