@@ -8,11 +8,11 @@ import { useAppSelector } from "../lib/hooks/redux.hooks";
 const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
-    height: "100%",
+    height: "calc(100% - 126px)",
+    overflow: "hidden",
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    padding: "20px 0",
     alignItems: "center",
     justifyContent: "center",
   },

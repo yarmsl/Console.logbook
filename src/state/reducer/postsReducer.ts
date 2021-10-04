@@ -1,5 +1,6 @@
 import {
   ADD_POST,
+  DELETE_POST,
   EDIT_POST,
   GET_POSTS,
   POSTS_ERROR,
@@ -21,10 +22,25 @@ const postsReducer = (state = initState, action: PostActions): PostsReducer => {
     case ADD_POST:
       return {
         ...state,
-        posts: action.post ? [...state.posts, action.post] : [...state.posts],
+        posts: action.post ? [...state.posts, action.post] : state.posts,
       };
-   //  case EDIT_POST:
-   //    return {...state, posts: action.postId ? [...state.posts, state.posts.filter(post => post.id === action.postId)] : [...state.posts]};
+    case EDIT_POST:
+      return {
+        ...state,
+        posts: action.postId
+          ? [
+              ...state.posts,
+              state.posts.filter((post) => post.id === action.postId)?.[0],
+            ]
+          : state.posts,
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: action.postId
+          ? state.posts.filter((post) => post.id !== action.postId)
+          : state.posts,
+      };
     case RESET_POSTS:
       return initState;
     case POSTS_ERROR:
