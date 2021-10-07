@@ -4,22 +4,21 @@ import {
   Box,
   Container,
   TextField,
-  makeStyles,
   ButtonGroup,
   Button,
   Typography,
   LinearProgress,
 } from "@material-ui/core";
-import HelmetLayout from "../layouts/HelmetLayout";
+import HelmetTitle from "../layouts/Helmet";
 import { signIn, signUp } from "../state/actions/authActions";
 import { useAppDispatch, useAppSelector } from "../lib/hooks/redux.hooks";
 import { OPEN_SNACKBAR } from "../lib/constants";
 
-const useStyles = makeStyles(() => ({
+const styles = {
   root: {
     display: "flex",
     flexDirection: "column",
-  },
+  } as const,
   title: {
     display: "flex",
     justifyContent: "flex-end",
@@ -27,7 +26,7 @@ const useStyles = makeStyles(() => ({
     marginBottom: 15,
     transform: "rotate(1deg)",
     userSelect: "none",
-  },
+  } as const,
   form: {
     height: "280px",
     "&>*": {
@@ -37,13 +36,12 @@ const useStyles = makeStyles(() => ({
   input: {
     height: "70px",
   },
-}));
+};
 
 const Auth = (): ReactElement => {
   const { handleSubmit, control, setError, clearErrors } = useForm<formLogin>();
   const dispatch = useAppDispatch();
   const { isLoading, error } = useAppSelector((st) => st.auth);
-  const classes = useStyles();
 
   const snackAlert = useCallback(
     (err: string) => {
@@ -84,14 +82,15 @@ const Auth = (): ReactElement => {
   }, [error]);
 
   return (
-    <HelmetLayout title="Sign">
-      <Container className={classes.root} maxWidth="xs">
-        <Box className={classes.title}>
+    <>
+      <HelmetTitle title="Sign" />
+      <Container sx={styles.root} maxWidth="xs">
+        <Box sx={styles.title}>
           <Typography>Welcome to&nbsp;</Typography>
           <Typography color="secondary">Console.logbook&nbsp;</Typography>
           <Typography>- a simple notebook</Typography>
         </Box>
-        <Box className={classes.form} component="form">
+        <Box sx={styles.form} component="form">
           <Controller
             name="email"
             control={control}
@@ -99,7 +98,7 @@ const Auth = (): ReactElement => {
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <TextField
                 tabIndex={1}
-                className={classes.input}
+                sx={styles.input}
                 label="Email"
                 fullWidth
                 type="text"
@@ -126,7 +125,7 @@ const Auth = (): ReactElement => {
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <TextField
                 tabIndex={2}
-                className={classes.input}
+                sx={styles.input}
                 label="Password"
                 fullWidth
                 type="password"
@@ -160,7 +159,7 @@ const Auth = (): ReactElement => {
           {isLoading && <LinearProgress color="secondary" />}
         </Box>
       </Container>
-    </HelmetLayout>
+    </>
   );
 };
 

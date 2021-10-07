@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Box, makeStyles, Snackbar, Typography } from "@material-ui/core";
+import { Box, Snackbar, Typography } from "@material-ui/core";
 import ErrorRoundedIcon from "@material-ui/icons/ErrorRounded";
 import ThumbUpAltRoundedIcon from "@material-ui/icons/ThumbUpAltRounded";
 import WarningRoundedIcon from "@material-ui/icons/WarningRounded";
@@ -12,33 +12,32 @@ export interface SnackProps {
   message: string;
 }
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
   snack: {
     display: "flex",
     width: "100%",
     height: "100%",
     padding: "8px 16px",
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: 'shape.borderRadius',
     marginBottom: "56px",
-  },
+  } as const,
   alert: {
-    backgroundColor: theme.palette.error.main,
+    bgcolor: 'error.main',
   },
   success: {
-    backgroundColor: theme.palette.success.main,
+	bgcolor: 'success.main',
   },
   warning: {
-    backgroundColor: theme.palette.warning.main,
+	bgcolor: 'warning.main',
   },
   message: {
-    color: theme.palette.secondary.contrastText,
+    color: 'secondary.contrastText',
     userSelect: "none",
     marginRight: "4px",
-  },
-}));
+  } as const,
+};
 
 const Snack = ({ open, type, message }: SnackProps): ReactElement => {
-  const classes = useStyles();
   const dispatch = useAppDispatch();
 
   return (
@@ -48,21 +47,21 @@ const Snack = ({ open, type, message }: SnackProps): ReactElement => {
       autoHideDuration={3500}>
       <>
         {type === "alert" && (
-          <Box className={[classes.snack, classes.alert].join(" ")}>
-            <ErrorRoundedIcon className={classes.message} />
-            <Typography className={classes.message}>{message}</Typography>
+          <Box sx={{...styles.snack, ...styles.alert}}>
+            <ErrorRoundedIcon sx={styles.message} />
+            <Typography sx={styles.message}>{message}</Typography>
           </Box>
         )}
         {type === "success" && (
-          <Box className={[classes.snack, classes.success].join(" ")}>
-            <ThumbUpAltRoundedIcon className={classes.message} />
-            <Typography className={classes.message}>{message}</Typography>
+          <Box sx={{...styles.snack, ...styles.success}}>
+            <ThumbUpAltRoundedIcon sx={styles.message} />
+            <Typography sx={styles.message}>{message}</Typography>
           </Box>
         )}
         {type === "warning" && (
-          <Box className={[classes.snack, classes.warning].join(" ")}>
-            <WarningRoundedIcon className={classes.message} />
-            <Typography className={classes.message}>{message}</Typography>
+          <Box sx={{...styles.snack, ...styles.warning}}>
+            <WarningRoundedIcon sx={styles.message} />
+            <Typography sx={styles.message}>{message}</Typography>
           </Box>
         )}
         {type === undefined && <Box></Box>}

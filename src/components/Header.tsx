@@ -6,7 +6,6 @@ import {
   Divider,
   IconButton,
   Link as MUILink,
-  makeStyles,
   Menu,
   MenuItem,
   Typography,
@@ -17,7 +16,7 @@ import { useHistory, Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../lib/hooks/redux.hooks";
 import { signOut } from "../state/actions/authActions";
 
-const useStyles = makeStyles(({ palette }) => ({
+const styles = {
   header: {
     height: 68,
     display: "flex",
@@ -25,20 +24,19 @@ const useStyles = makeStyles(({ palette }) => ({
     justifyContent: "space-between",
   },
   logo: {
-    color: palette.secondary.contrastText,
+    color: "secondary.contrastText",
     userSelect: "none",
     transform: "rotate(1deg)",
-  },
+  } as const,
   avatar: {
-    backgroundColor: palette.secondary.light,
+    bgcolor: "secondary.light",
   },
   menuTitle: {
-    marginLeft: "8px",
-  },
-}));
+    ml: "8px",
+  } as const,
+};
 
 const Header = (): JSX.Element => {
-  const classes = useStyles();
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isAuth = useAppSelector((state) => state.auth.isAuth);
@@ -54,10 +52,10 @@ const Header = (): JSX.Element => {
     setAnchorEl(null);
   };
   return (
-    <AppBar position="sticky">
-      <Container className={classes.header}>
+    <AppBar enableColorOnDark position="sticky">
+      <Container sx={styles.header}>
         <MUILink component={Link} to={"/"}>
-          <Typography variant="h5" component="h1" className={classes.logo}>
+          <Typography variant="h5" component="h1" sx={styles.logo}>
             Console.logbook(&apos;123&apos;)
           </Typography>
         </MUILink>
@@ -67,7 +65,7 @@ const Header = (): JSX.Element => {
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={handleClick}>
-              <Avatar className={classes.avatar}></Avatar>
+              <Avatar sx={styles.avatar}></Avatar>
             </IconButton>
             <>
               <Menu
@@ -81,7 +79,7 @@ const Header = (): JSX.Element => {
                     router.push(`/profile/${id}`), handleClose();
                   }}>
                   <PersonIcon />
-                  <Typography className={classes.menuTitle}>Profile</Typography>
+                  <Typography sx={styles.menuTitle}>Profile</Typography>
                 </MenuItem>
                 <Divider />
                 <MenuItem
@@ -89,7 +87,7 @@ const Header = (): JSX.Element => {
                     dispatch(signOut()), handleClose();
                   }}>
                   <ExitToAppRoundedIcon />
-                  <Typography className={classes.menuTitle}>Logout</Typography>
+                  <Typography sx={styles.menuTitle}>Logout</Typography>
                 </MenuItem>
               </Menu>
             </>

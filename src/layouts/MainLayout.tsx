@@ -1,11 +1,11 @@
 import { ReactElement } from "react";
 import Header from "../components/Header";
-import { Container, makeStyles } from "@material-ui/core";
+import { Container} from "@material-ui/core";
 import Footer from "../components/Footer";
 import Snack from "../UI/Snack";
 import { useAppSelector } from "../lib/hooks/redux.hooks";
 
-const useStyles = makeStyles(() => ({
+const styles = {
   root: {
     width: "100%",
     height: "calc(100% - 126px)",
@@ -15,16 +15,15 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-  },
-}));
+  } as const,
+};
 
 const MainLayout = ({ children }: Child): ReactElement => {
-  const classes = useStyles();
   const snackBar = useAppSelector((state) => state.snackBar);
   return (
     <>
       <Header />
-      <Container className={classes.root}>
+      <Container sx={styles.root}>
         <>{children}</>
       </Container>
       <>

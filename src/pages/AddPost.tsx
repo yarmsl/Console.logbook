@@ -5,21 +5,20 @@ import {
   Button,
   Container,
   LinearProgress,
-  makeStyles,
   TextField,
 } from "@material-ui/core";
-import HelmetLayout from "../layouts/HelmetLayout";
+import HelmetTitle from "../layouts/Helmet";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import { useAppDispatch, useAppSelector } from "../lib/hooks/redux.hooks";
 import { publishPost } from "../state/actions/postsActions";
 
-const useStyles = makeStyles(() => ({
+const styles = {
   form: {
     width: "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  },
+  } as const,
   title: {
     height: "80px",
   },
@@ -37,11 +36,10 @@ const useStyles = makeStyles(() => ({
     alignSelf: "flex-end",
     margin: "8px 0",
   },
-}));
+};
 
 const AddPost = (): ReactElement => {
   const { handleSubmit, control } = useForm<postProps>();
-  const classes = useStyles();
   const dispatch = useAppDispatch();
   const token = useAppSelector((st) => st.auth.token);
   const isLoading = useAppSelector((st) => st.posts.isLoading);
@@ -53,11 +51,12 @@ const AddPost = (): ReactElement => {
   };
 
   return (
-    <HelmetLayout title="AddLog">
+    <>
+      <HelmetTitle title="AddLog" />
       <Container maxWidth="sm">
         <Box
           onSubmit={handleSubmit(onSubmit)}
-          className={classes.form}
+          sx={styles.form}
           component="form">
           <Controller
             name="title"
@@ -65,7 +64,7 @@ const AddPost = (): ReactElement => {
             defaultValue=""
             render={({ field: { onChange, value }, fieldState: { error } }) => (
               <TextField
-                className={classes.title}
+                sx={styles.title}
                 variant="filled"
                 color="secondary"
                 autoFocus
@@ -99,7 +98,7 @@ const AddPost = (): ReactElement => {
                 minRows={10}
                 maxRows={20}
                 tabIndex={2}
-                className={classes.textfield}
+                sx={styles.textfield}
                 label="Log"
                 fullWidth
                 type="text"
@@ -117,11 +116,9 @@ const AddPost = (): ReactElement => {
               },
             }}
           />
-          {isLoading && (
-            <LinearProgress className={classes.loader} color="secondary" />
-          )}
+          {isLoading && <LinearProgress sx={styles.loader} color="secondary" />}
           <Button
-            className={classes.submit}
+            sx={styles.submit}
             type="submit"
             variant="outlined"
             color="secondary"
@@ -130,7 +127,7 @@ const AddPost = (): ReactElement => {
           </Button>
         </Box>
       </Container>
-    </HelmetLayout>
+    </>
   );
 };
 
