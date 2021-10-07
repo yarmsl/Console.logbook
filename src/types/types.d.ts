@@ -2,11 +2,7 @@ interface Child  {
 	children?: React.ReactNode;
 }
 
-interface LDTheme {
-	type: 'light' | 'dark';
-}
-
-interface MetaLT extends Child {
+interface MetaLT {
 	title: string;
 }
 

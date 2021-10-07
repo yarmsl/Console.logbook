@@ -1,15 +1,15 @@
 import { createTheme } from "@material-ui/core/styles";
 
-const lightTheme = createTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1920,
-    },
-  },
+const theme = createTheme({
+//   breakpoints: {
+//     values: {
+//       xs: 0,
+//       sm: 600,
+//       md: 960,
+//       lg: 1280,
+//       xl: 1920,
+//     },
+//   },
   palette: {
     primary: {
       dark: "#00695f",
@@ -53,14 +53,16 @@ const lightTheme = createTheme({
   shape: {
     borderRadius: 8,
   },
-  overrides: {
+  components: {
     MuiContainer: {
-      root: {
-        display: "flex",
+      styleOverrides: {
+        root: {
+          display: "flex",
+        },
       },
     },
     MuiCssBaseline: {
-      "@global": {
+      styleOverrides: {
         "::-webkit-scrollbar": {
           width: "8px",
           height: "8px",
@@ -102,4 +104,4 @@ const lightTheme = createTheme({
   },
 });
 
-export default lightTheme;
+export default theme;

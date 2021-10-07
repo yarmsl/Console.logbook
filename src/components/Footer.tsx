@@ -1,13 +1,13 @@
-import { Box, Container, IconButton, makeStyles, Typography } from '@material-ui/core';
+import { Box, Container, IconButton, Typography } from '@material-ui/core';
 import TelegramIcon from '@material-ui/icons/Telegram';
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
 	footer: {
 		height: 58,
-		backgroundColor: theme.palette.secondary.light,
+		backgroundColor: 'secondary.light',
 		color: '#fff',
 		userSelect: 'none'
-	},
+	} as const,
 	wrapper: {
 		width: '100%',
 		height: '100%',
@@ -28,22 +28,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 	icon: {
 		color: '#fff'
-	}
-}));
+	} as const
+};
 
 const Footer = (): JSX.Element => {
 
-	const classes = useStyles();
-
 	return (
-		<Box className={classes.footer} component='footer'>
-			<Container className={classes.wrapper}>
-				<Box className={classes.left}>
-					<Typography className={classes.logo} variant='body2'>Console.logbook(&#39;Data&#39;)</Typography>
+		<Box sx={styles.footer} component='footer'>
+			<Container sx={styles.wrapper}>
+				<Box sx={styles.left}>
+					<Typography sx={styles.logo} variant='body2'>Console.logbook(&#39;Data&#39;)</Typography>
 				</Box>
 				<Typography variant='body2'>© 2021</Typography>
-				<Box className={classes.right}>
-					<IconButton className={classes.icon} href='https://t.me/Yaroslavmsl'><TelegramIcon /></IconButton>
+				<Box sx={styles.right}>
+					<IconButton sx={styles.icon} href='https://t.me/Yaroslavmsl'><TelegramIcon /></IconButton>
 					<Typography>Yaroslav M.</Typography>
 				</Box>
 

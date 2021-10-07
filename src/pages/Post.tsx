@@ -1,12 +1,13 @@
-import { ReactElement } from 'react';
-import HelmetLayout from '../layouts/HelmetLayout';
+import { ReactElement } from "react";
+import HelmetTitle from "../layouts/Helmet";
 
 const Post = (): ReactElement => {
-	return (
-		<HelmetLayout title='Post'>
-			Post
-		</HelmetLayout>
-	);
+  return (
+    <>
+      <HelmetTitle title="Post" />
+      Post
+    </>
+  );
 };
 
 export default Post;

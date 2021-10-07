@@ -1,12 +1,13 @@
-import { ReactElement } from 'react';
-import HelmetLayout from '../layouts/HelmetLayout';
+import { ReactElement } from "react";
+import HelmetTitle from "../layouts/Helmet";
 
 const Profile = (): ReactElement => {
-	return (
-		<HelmetLayout title='Profile'>
-			Profile
-		</HelmetLayout>
-	);
+  return (
+    <>
+      <HelmetTitle title="Profile" />
+      Profile
+    </>
+  );
 };
 
 export default Profile;
