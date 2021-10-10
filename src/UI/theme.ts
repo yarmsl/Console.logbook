@@ -1,4 +1,4 @@
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
 //   breakpoints: {
@@ -51,7 +51,7 @@ const theme = createTheme({
   // 	'none'
   // ],
   shape: {
-    borderRadius: '8px',
+    borderRadius: 8,
   },
   components: {
     MuiContainer: {

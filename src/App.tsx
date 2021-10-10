@@ -1,7 +1,7 @@
 import { ReactElement, useEffect } from "react";
 import { useRoutes } from "./Routes";
 import MainLayout from "./layouts/MainLayout";
-import { CssBaseline, ThemeProvider } from "@material-ui/core";
+import { CssBaseline, ThemeProvider, StyledEngineProvider } from "@mui/material";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./lib/hooks/redux.hooks";
 import { getPosts } from "./state/actions/postsActions";
@@ -19,12 +19,14 @@ const App = (): ReactElement => {
   }, [token]);
   
   return (
-	<ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <MainLayout>{routes}</MainLayout>
-      </Router>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <MainLayout>{routes}</MainLayout>
+        </Router>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

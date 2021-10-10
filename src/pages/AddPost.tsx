@@ -6,9 +6,9 @@ import {
   Container,
   LinearProgress,
   TextField,
-} from "@material-ui/core";
+} from "@mui/material";
 import HelmetTitle from "../layouts/Helmet";
-import SendRoundedIcon from "@material-ui/icons/SendRounded";
+import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { useAppDispatch, useAppSelector } from "../lib/hooks/redux.hooks";
 import { publishPost } from "../state/actions/postsActions";
 

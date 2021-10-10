@@ -1,4 +1,4 @@
-import { Container } from '@material-ui/core';
+import { Container } from '@mui/material';
 
 const NotFound = (): JSX.Element => {
 	return (

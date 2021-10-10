@@ -9,9 +9,9 @@ import {
   Menu,
   MenuItem,
   Typography,
-} from "@material-ui/core";
-import PersonIcon from "@material-ui/icons/Person";
-import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
+} from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 import { useHistory, Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../lib/hooks/redux.hooks";
 import { signOut } from "../state/actions/authActions";
@@ -64,7 +64,8 @@ const Header = (): JSX.Element => {
             <IconButton
               aria-controls="simple-menu"
               aria-haspopup="true"
-              onClick={handleClick}>
+              onClick={handleClick}
+              size="large">
               <Avatar sx={styles.avatar}></Avatar>
             </IconButton>
             <>

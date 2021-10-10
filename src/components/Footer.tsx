@@ -1,5 +1,5 @@
-import { Box, Container, IconButton, Typography } from "@material-ui/core";
-import TelegramIcon from "@material-ui/icons/Telegram";
+import { Box, Container, IconButton, Typography } from "@mui/material";
+import TelegramIcon from "@mui/icons-material/Telegram";
 
 const styles = {
   footer: {
@@ -42,7 +42,7 @@ const Footer = (): JSX.Element => {
         </Box>
         <Typography variant="body2">© 2021</Typography>
         <Box sx={styles.right}>
-          <IconButton sx={styles.icon} href="https://t.me/Yaroslavmsl">
+          <IconButton sx={styles.icon} href="https://t.me/Yaroslavmsl" size="large">
             <TelegramIcon />
           </IconButton>
           <Typography>Yaroslav M.</Typography>
