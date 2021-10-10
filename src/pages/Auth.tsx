@@ -16,6 +16,7 @@ import { OPEN_SNACKBAR } from "../lib/constants";
 
 const styles = {
   root: {
+    height: "280px",
     display: "flex",
     flexDirection: "column",
   } as const,
@@ -23,18 +24,17 @@ const styles = {
     display: "flex",
     justifyContent: "flex-end",
     flexWrap: "wrap",
-    marginBottom: 15,
+    mb: "15px",
     transform: "rotate(1deg)",
     userSelect: "none",
   } as const,
   form: {
-    height: "280px",
     "&>*": {
-      marginBottom: 15,
+      mb: "15px",
     },
   },
   input: {
-    height: "70px",
+    height: "82px",
   },
 };
 
@@ -156,8 +156,8 @@ const Auth = (): ReactElement => {
               Sign in
             </Button>
           </ButtonGroup>
-          {isLoading && <LinearProgress color="secondary" />}
         </Box>
+        {isLoading && <LinearProgress color="secondary" />}
       </Container>
     </>
   );
