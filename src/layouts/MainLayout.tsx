@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import Header from "../components/Header";
-import { Container} from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import Footer from "../components/Footer";
 import Snack from "../UI/Snack";
 import { useAppSelector } from "../lib/hooks/redux.hooks";
@@ -26,9 +26,7 @@ const MainLayout = ({ children }: Child): ReactElement => {
       <Container sx={styles.root}>
         <>{children}</>
       </Container>
-      <>
-        <Snack {...snackBar} />
-      </>
+      <Snack {...snackBar} />
       <Footer />
     </>
   );

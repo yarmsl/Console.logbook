@@ -17,23 +17,23 @@ const styles = {
     display: "flex",
     width: "100%",
     height: "100%",
-    padding: "8px 16px",
-    borderRadius: 'shape.borderRadius',
-    marginBottom: "56px",
+    p: "8px 16px",
+   //  borderRadius: "shape.borderRadius",
+    mb: "56px",
   } as const,
   alert: {
-    bgcolor: 'error.main',
+    bgcolor: "error.main",
   },
   success: {
-	bgcolor: 'success.main',
+    bgcolor: "success.main",
   },
   warning: {
-	bgcolor: 'warning.main',
+    bgcolor: "warning.main",
   },
   message: {
-    color: 'secondary.contrastText',
+    color: "secondary.contrastText",
     userSelect: "none",
-    marginRight: "4px",
+    mr: "4px",
   } as const,
 };
 
@@ -42,30 +42,31 @@ const Snack = ({ open, type, message }: SnackProps): ReactElement => {
 
   return (
     <Snackbar
-      open={open}
+      open={true}
       onClose={() => dispatch({ type: RESET_SNACKBAR })}
       autoHideDuration={3500}>
-      <>
+      <div>
         {type === "alert" && (
-          <Box sx={{...styles.snack, ...styles.alert}}>
+          <Box sx={{ ...styles.snack, ...styles.alert }}>
             <ErrorRoundedIcon sx={styles.message} />
             <Typography sx={styles.message}>{message}</Typography>
           </Box>
         )}
         {type === "success" && (
-          <Box sx={{...styles.snack, ...styles.success}}>
+          <Box sx={{ ...styles.snack, ...styles.success }}>
             <ThumbUpAltRoundedIcon sx={styles.message} />
             <Typography sx={styles.message}>{message}</Typography>
           </Box>
         )}
-        {type === "warning" && (
-          <Box sx={{...styles.snack, ...styles.warning}}>
+        {type === undefined && (
+          <Box sx={{ ...styles.snack, ...styles.warning }}>
             <WarningRoundedIcon sx={styles.message} />
             <Typography sx={styles.message}>{message}</Typography>
           </Box>
         )}
-        {type === undefined && <Box></Box>}
-      </>
+        {type === undefined && <Box>err</Box>}
+        {console.log(type)}
+      </div>
     </Snackbar>
   );
 };
