@@ -18,7 +18,7 @@ const styles = {
     width: "100%",
     height: "100%",
     p: "8px 16px",
-   //  borderRadius: "shape.borderRadius",
+    borderRadius: "8px",
     mb: "56px",
   } as const,
   alert: {
@@ -42,7 +42,7 @@ const Snack = ({ open, type, message }: SnackProps): ReactElement => {
 
   return (
     <Snackbar
-      open={true}
+      open={open}
       onClose={() => dispatch({ type: RESET_SNACKBAR })}
       autoHideDuration={3500}>
       <div>
@@ -58,14 +58,13 @@ const Snack = ({ open, type, message }: SnackProps): ReactElement => {
             <Typography sx={styles.message}>{message}</Typography>
           </Box>
         )}
-        {type === undefined && (
+        {type === "warning" && (
           <Box sx={{ ...styles.snack, ...styles.warning }}>
             <WarningRoundedIcon sx={styles.message} />
             <Typography sx={styles.message}>{message}</Typography>
           </Box>
         )}
         {type === undefined && <Box>err</Box>}
-        {console.log(type)}
       </div>
     </Snackbar>
   );

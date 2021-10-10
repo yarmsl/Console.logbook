@@ -51,7 +51,7 @@ const theme = createTheme({
   // 	'none'
   // ],
   shape: {
-    borderRadius: 8,
+    borderRadius: '8px',
   },
   components: {
     MuiContainer: {
