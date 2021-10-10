@@ -1,4 +1,4 @@
-import { Container, LinearProgress } from "@material-ui/core";
+import { Container, LinearProgress } from "@mui/material";
 import { ReactElement } from "react";
 import { useHistory } from "react-router";
 import HelmetTitle from "../layouts/Helmet";

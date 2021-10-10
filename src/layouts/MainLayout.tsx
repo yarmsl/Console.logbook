@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import Header from "../components/Header";
-import { Container } from "@material-ui/core";
+import { Container } from "@mui/material";
 import Footer from "../components/Footer";
 import Snack from "../UI/Snack";
 import { useAppSelector } from "../lib/hooks/redux.hooks";

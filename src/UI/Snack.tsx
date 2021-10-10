@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
-import { Box, Snackbar, Typography } from "@material-ui/core";
-import ErrorRoundedIcon from "@material-ui/icons/ErrorRounded";
-import ThumbUpAltRoundedIcon from "@material-ui/icons/ThumbUpAltRounded";
-import WarningRoundedIcon from "@material-ui/icons/WarningRounded";
+import { Box, Snackbar, Typography } from "@mui/material";
+import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
+import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
+import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 import { RESET_SNACKBAR } from "../lib/constants";
 import { useAppDispatch } from "../lib/hooks/redux.hooks";
 
@@ -18,7 +18,7 @@ const styles = {
     width: "100%",
     height: "100%",
     p: "8px 16px",
-    borderRadius: "8px",
+    borderRadius: 1,
     mb: "56px",
   } as const,
   alert: {
