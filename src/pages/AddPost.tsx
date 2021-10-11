@@ -34,7 +34,7 @@ const styles = {
   },
   submit: {
     alignSelf: "flex-end",
-    margin: "8px 0",
+    m: "8px 0",
   },
 };
 
@@ -44,7 +44,6 @@ const AddPost = (): ReactElement => {
   const token = useAppSelector((st) => st.auth.token);
   const isLoading = useAppSelector((st) => st.posts.isLoading);
   const onSubmit = (data: postProps) => {
-    console.log(data);
     if (token) {
       dispatch(publishPost(data, token));
     }

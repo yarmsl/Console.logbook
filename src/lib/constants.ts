@@ -1,5 +1,5 @@
 export const BASE_URL = 'http://localhost:3000';
-export const SERVER_URL = 'http://localhost:5000';
+export const SERVER_URL = 'http://79.143.29.11:5000';
 
 //AuthReducer
 export const SIGN_IN = 'SIGN_IN';

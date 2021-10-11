@@ -18,7 +18,7 @@ import { signOut } from "../state/actions/authActions";
 
 const styles = {
   header: {
-    height: 68,
+    height: '68px',
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
@@ -52,7 +52,7 @@ const Header = (): JSX.Element => {
     setAnchorEl(null);
   };
   return (
-    <AppBar enableColorOnDark position="sticky">
+    <AppBar enableColorOnDark position='static'>
       <Container sx={styles.header}>
         <MUILink component={Link} to={"/"}>
           <Typography variant="h5" component="h1" sx={styles.logo}>
