@@ -9,10 +9,12 @@ import LogCard from "../UI/LogCard";
 const styles = {
   root: {
     width: "100%",
-    overflowY: "auto",
+    height: "100%",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    overflow: 'auto',
+    py: "50px",
   } as const,
   loader: {
     width: "100%",
@@ -26,10 +28,10 @@ const Posts = (): ReactElement => {
   return (
     <>
       <HelmetTitle title="Posts" />
-      <Container sx={styles.root} maxWidth="sm">
+      <Container sx={styles.root} >
         {isLoading && <LinearProgress sx={styles.loader} color="secondary" />}
-        {posts?.map((post) => (
-          <LogCard key={post.id} {...post} />
+        {posts?.map((post, i) => (
+          <LogCard key={`post-${i}`} {...post} />
         ))}
       </Container>
       <FabAdd onClick={() => router.push("/addPost")} />

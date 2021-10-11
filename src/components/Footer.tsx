@@ -3,7 +3,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 
 const styles = {
   footer: {
-    height: 58,
+    height: '58px',
     backgroundColor: "secondary.light",
     color: "#fff",
     userSelect: "none",

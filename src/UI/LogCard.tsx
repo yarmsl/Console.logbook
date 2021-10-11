@@ -1,26 +1,20 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Typography,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const styles = {
   root: {
-    width: "100%",
-    height: 'auto'
+    width: '100%',
+    maxWidth: "520px",
+    border: "1px solid black",
   },
 };
 
 const LogCard = (data: PostModel): JSX.Element => {
   return (
-    <Card color="secondary" sx={styles.root}>
-      <CardHeader title={data.title} />
-      <CardContent>
-        <Typography component="pre">{data.text}</Typography>
-        <Typography>{data.date.toISOString()}</Typography>
-      </CardContent>
-    </Card>
+    <Box color="secondary" sx={styles.root}>
+      <Typography variant="h4">{data.title}</Typography>
+      <Typography component="pre">{data.text}</Typography>
+      <Typography>{data.date.toISOString()}</Typography>
+    </Box>
   );
 };
 

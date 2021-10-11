@@ -8,9 +8,9 @@ export interface FabProps {
 
 const styles = {
   fab: {
-    position: "absolute",
-    bottom: 12,
-    right: 12,
+    position: "fixed",
+    bottom: '70px',
+    right: '12px',
   } as const,
 };
 

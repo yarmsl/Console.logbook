@@ -9,7 +9,7 @@ const styles = {
   root: {
     width: "100%",
     height: "calc(100% - 126px)",
-    overflow: "hidden",
+    overflow: "auto",
     position: "relative",
     display: "flex",
     flexDirection: "column",
@@ -23,7 +23,7 @@ const MainLayout = ({ children }: Child): ReactElement => {
   return (
     <>
       <Header />
-      <Container sx={styles.root}>
+      <Container disableGutters sx={styles.root}>
         <>{children}</>
       </Container>
       <Snack {...snackBar} />
