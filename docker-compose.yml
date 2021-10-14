@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: console-logbook-front-container
+    image: console-logbook-front
+    build:
+      context: .
+    ports:
+      - 3000:3000
