@@ -1,4 +1,4 @@
-name: Deploy ConsoleLogbook Server
+name: Deploy ConsoleLogbook Front
 
 on:
   push:
