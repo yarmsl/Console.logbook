@@ -1,9 +1,9 @@
 FROM node:14-alpine AS builder
 ENV NODE_ENV production
 WORKDIR /app
-COPY package.json .
+ADD package.json package.json
 RUN npm install
-COPY . .
+ADD . .
 RUN npm run build
 
 FROM nginx:1.21.0-alpine as production
