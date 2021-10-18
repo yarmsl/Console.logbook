@@ -1,6 +1,6 @@
 FROM node:14-alpine AS builder
 ENV NODE_ENV production
-WORKDIR /app
+WORKDIR /web
 ADD package.json package.json
 ADD package-lock.json package-lock.json
 RUN npm install

@@ -1,9 +1,9 @@
 version: "3.8"
 
 services:
-  app:
-    container_name: console-logbook-front-container
+  web:
     image: docker.pkg.github.com/yarmsl/console.logbook/console-logbook-front
+    container_name: console-logbook-front-container
     build:
       context: .
     ports:
