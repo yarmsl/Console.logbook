@@ -23,7 +23,7 @@ const MainLayout = ({ children }: Child): ReactElement => {
   return (
     <>
       <Header />
-      <Container disableGutters sx={styles.root}>
+      <Container disableGutters sx={styles.root} maxWidth={false}>
         <>{children}</>
       </Container>
       <Snack {...snackBar} />

@@ -28,7 +28,7 @@ const Posts = (): ReactElement => {
   return (
     <>
       <HelmetTitle title="Posts" />
-      <Container sx={styles.root} >
+      <Container sx={styles.root} maxWidth={false}>
         {isLoading && <LinearProgress sx={styles.loader} color="secondary" />}
         {posts?.map((post, i) => (
           <LogCard key={`post-${i}`} {...post} />
