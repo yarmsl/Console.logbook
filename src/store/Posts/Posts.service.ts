@@ -6,13 +6,13 @@ export const postsAPI = createApi({
   reducerPath: "postsAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: `${SERVER_URL}/api/post`,
-    prepareHeaders: (headers, {getState}) => {
-      const token = (getState() as RootState).auth.token
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).auth.token;
       if (token) {
-        headers.set('authorization', `Bearer ${token}`)
+        headers.set("authorization", `Bearer ${token}`);
       }
-      return headers
-    }
+      return headers;
+    },
   }),
   endpoints: (build) => ({
     addPost: build.mutation<IPost, postProps>({
@@ -25,8 +25,8 @@ export const postsAPI = createApi({
     getPosts: build.query<IPost[], string>({
       query: () => ({
         url: "/",
-      })
-    })
+      }),
+    }),
   }),
 });
 

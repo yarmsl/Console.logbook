@@ -18,7 +18,7 @@ const App = (): ReactElement => {
   const id = useAppSelector((st) => st.user.id);
   const routes = useRoutes(isAuth);
   const skipQuery = useMemo(() => !token || !!id, [token, id]);
-  const { data, error } = useCheckAuthQuery("", { skip: skipQuery });
+  const { data } = useCheckAuthQuery("", { skip: skipQuery });
 
   useEffect(() => {
     if (data) {

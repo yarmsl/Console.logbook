@@ -27,7 +27,7 @@ const Posts = (): ReactElement => {
   const router = useHistory();
   const dispatch = useAppDispatch();
   const { posts } = useAppSelector((st) => st.posts);
-  const { data, isLoading, error } = useGetPostsQuery("", {
+  const { data, isLoading } = useGetPostsQuery("", {
     skip: posts.length > 0,
   });
 
