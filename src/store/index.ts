@@ -24,7 +24,10 @@ const rootReducer = combineReducers({
 const appStore = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authAPI.middleware, postsAPI.middleware),
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      authAPI.middleware,
+      postsAPI.middleware
+    ),
 });
 
 export const persistor = persistStore(appStore);

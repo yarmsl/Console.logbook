@@ -10,7 +10,7 @@ import appStore, { persistor } from "./store";
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider store={appStore}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate persistor={persistor}>
         <HelmetProvider>
           <App />
         </HelmetProvider>
