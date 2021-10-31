@@ -10,13 +10,9 @@ import {
   LinearProgress,
 } from "@mui/material";
 import HelmetTitle from "../layouts/Helmet";
-import {
-  useSignInMutation,
-  useSignUpMutation,
-} from "../store/Auth/Auth.service";
-import { useAppDispatch } from "../store/hooks";
-import { setAuth } from "../store/Auth/Auth.reducer";
-import { setUser, setUserId } from "../store/User/User.reducer";
+import { useAppDispatch } from "../store";
+import { setAuth, useSignInMutation, useSignUpMutation } from "../store/Auth";
+import { setUser, setUserId } from "../store/User";
 import { batch } from "react-redux";
 
 const styles = {
