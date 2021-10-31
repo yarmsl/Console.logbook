@@ -1,11 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import authReducer from "./Auth/Auth.reducer";
-import { authAPI } from "./Auth/Auth.service";
-import postsReducer from "./Posts/Posts.reducer";
-import { postsAPI } from "./Posts/Posts.service";
-import userReducer from "./User/User.reducer";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { authReducer, authAPI } from "./Auth";
+import { postsReducer, postsAPI } from "./Posts";
+import { userReducer } from "./User";
 
 const authPersistConfig = {
   key: "auth",
@@ -30,6 +28,7 @@ const appStore = configureStore({
     ),
 });
 
+export * from "./hooks";
 export const persistor = persistStore(appStore);
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = typeof appStore;

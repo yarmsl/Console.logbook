@@ -2,9 +2,8 @@ import { Container, LinearProgress } from "@mui/material";
 import { ReactElement, useEffect } from "react";
 import { useHistory } from "react-router";
 import HelmetTitle from "../layouts/Helmet";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setPosts } from "../store/Posts/Posts.reducer";
-import { useGetPostsQuery } from "../store/Posts/Posts.service";
+import { useAppDispatch, useAppSelector } from "../store";
+import { setPosts, useGetPostsQuery} from "../store/Posts";
 import { FabAdd } from "../UI/FAB";
 import LogCard from "../UI/LogCard";
 

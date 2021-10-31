@@ -8,9 +8,9 @@ import {
 } from "@mui/material";
 import { BrowserRouter as Router } from "react-router-dom";
 import theme from "./UI/theme";
-import { useAppSelector, useAppDispatch } from "./store/hooks";
-import { useCheckAuthQuery } from "./store/Auth/Auth.service";
-import { setUser } from "./store/User/User.reducer";
+import { useAppSelector, useAppDispatch } from "./store";
+import { useCheckAuthQuery } from "./store/Auth";
+import { setUser } from "./store/User";
 
 const App = (): ReactElement => {
   const dispatch = useAppDispatch();
