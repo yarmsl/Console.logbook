@@ -2,8 +2,8 @@ import { ReactElement } from "react";
 import Header from "../components/Header";
 import { Container } from "@mui/material";
 import Footer from "../components/Footer";
-import Snack from "../UI/Snack";
-import { useAppSelector } from "../lib/hooks/redux.hooks";
+// import Snack from "../UI/Snack";
+
 
 const styles = {
   root: {
@@ -19,14 +19,14 @@ const styles = {
 };
 
 const MainLayout = ({ children }: Child): ReactElement => {
-  const snackBar = useAppSelector((state) => state.snackBar);
+  // const snackBar = useAppSelector((state) => state.snackBar);
   return (
     <>
       <Header />
       <Container disableGutters sx={styles.root} maxWidth={false}>
         <>{children}</>
       </Container>
-      <Snack {...snackBar} />
+      {/* <Snack {...snackBar} /> */}
       <Footer />
     </>
   );

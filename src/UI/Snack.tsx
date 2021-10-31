@@ -3,8 +3,6 @@ import { Box, Snackbar, Typography } from "@mui/material";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
 import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
-import { RESET_SNACKBAR } from "../lib/constants";
-import { useAppDispatch } from "../lib/hooks/redux.hooks";
 
 export interface SnackProps {
   open: boolean;
@@ -38,12 +36,12 @@ const styles = {
 };
 
 const Snack = ({ open, type, message }: SnackProps): ReactElement => {
-  const dispatch = useAppDispatch();
+
 
   return (
     <Snackbar
       open={open}
-      onClose={() => dispatch({ type: RESET_SNACKBAR })}
+      // onClose={() => dispatch({ type: RESET_SNACKBAR })}
       autoHideDuration={3500}>
       <div>
         {type === "alert" && (

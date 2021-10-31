@@ -1,8 +1,10 @@
 import { Container, LinearProgress } from "@mui/material";
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { useHistory } from "react-router";
 import HelmetTitle from "../layouts/Helmet";
-import { useAppSelector } from "../lib/hooks/redux.hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setPosts } from "../store/Posts/Posts.reducer";
+import { useGetPostsQuery } from "../store/Posts/Posts.service";
 import { FabAdd } from "../UI/FAB";
 import LogCard from "../UI/LogCard";
 
@@ -13,7 +15,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    overflow: 'auto',
+    overflow: "auto",
     py: "50px",
   } as const,
   loader: {
@@ -23,7 +25,17 @@ const styles = {
 
 const Posts = (): ReactElement => {
   const router = useHistory();
-  const { isLoading, posts } = useAppSelector((st) => st.posts);
+  const dispatch = useAppDispatch();
+  const { posts } = useAppSelector((st) => st.posts);
+  const { data, isLoading, error } = useGetPostsQuery("", {
+    skip: posts.length > 0,
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setPosts(data));
+    }
+  }, [data]);
 
   return (
     <>

@@ -1,23 +1,30 @@
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useMemo } from "react";
 import { useRoutes } from "./Routes";
 import MainLayout from "./layouts/MainLayout";
-import { CssBaseline, ThemeProvider, StyledEngineProvider } from "@mui/material";
+import {
+  CssBaseline,
+  ThemeProvider,
+  StyledEngineProvider,
+} from "@mui/material";
 import { BrowserRouter as Router } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "./lib/hooks/redux.hooks";
-import { getPosts } from "./state/actions/postsActions";
-import theme from './UI/theme';
+import theme from "./UI/theme";
+import { useAppSelector, useAppDispatch } from "./store/hooks";
+import { useCheckAuthQuery } from "./store/Auth/Auth.service";
+import { setUser } from "./store/User/User.reducer";
 
 const App = (): ReactElement => {
   const dispatch = useAppDispatch();
-  const { isAuth, token } = useAppSelector((state) => state.auth);
+  const { isAuth, token } = useAppSelector((st) => st.auth);
+  const id = useAppSelector((st) => st.user.id);
   const routes = useRoutes(isAuth);
+  const skipQuery = useMemo(() => !token || !!id, [token, id]);
+  const { data, error } = useCheckAuthQuery("", { skip: skipQuery });
 
   useEffect(() => {
-    if (token) {
-      dispatch(getPosts(token));
+    if (data) {
+      dispatch(setUser(data));
     }
-  }, [token]);
-  
+  }, [data]);
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>

@@ -9,8 +9,9 @@ import {
 } from "@mui/material";
 import HelmetTitle from "../layouts/Helmet";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
-import { useAppDispatch, useAppSelector } from "../lib/hooks/redux.hooks";
-import { publishPost } from "../state/actions/postsActions";
+import { useAppDispatch } from "../store/hooks";
+import { addPost } from "../store/Posts/Posts.reducer";
+import { useAddPostMutation } from "../store/Posts/Posts.service";
 
 const styles = {
   form: {
@@ -41,11 +42,14 @@ const styles = {
 const AddPost = (): ReactElement => {
   const { handleSubmit, control } = useForm<postProps>();
   const dispatch = useAppDispatch();
-  const token = useAppSelector((st) => st.auth.token);
-  const isLoading = useAppSelector((st) => st.posts.isLoading);
-  const onSubmit = (data: postProps) => {
-    if (token) {
-      dispatch(publishPost(data, token));
+  const [sendPost, {isLoading}] = useAddPostMutation();
+
+  const onSubmit = async (data: postProps) => {
+    try {
+      const post = await sendPost(data).unwrap()
+      dispatch(addPost(post));
+    } catch (e) {
+      console.log(e)
     }
   };
 
@@ -56,7 +60,8 @@ const AddPost = (): ReactElement => {
         <Box
           onSubmit={handleSubmit(onSubmit)}
           sx={styles.form}
-          component="form">
+          component="form"
+        >
           <Controller
             name="title"
             control={control}
@@ -121,7 +126,8 @@ const AddPost = (): ReactElement => {
             type="submit"
             variant="outlined"
             color="secondary"
-            endIcon={<SendRoundedIcon />}>
+            endIcon={<SendRoundedIcon />}
+          >
             Publish
           </Button>
         </Box>

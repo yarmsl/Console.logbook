@@ -8,12 +8,12 @@ const styles = {
   },
 };
 
-const LogCard = (data: PostModel): JSX.Element => {
+const LogCard = (data: IPost): JSX.Element => {
   return (
     <Box color="secondary" sx={styles.root}>
       <Typography variant="h4">{data.title}</Typography>
       <Typography component="pre">{data.text}</Typography>
-      <Typography>{data.date.toISOString()}</Typography>
+      <Typography>{data.date}</Typography>
     </Box>
   );
 };
