@@ -4,17 +4,16 @@ import { HelmetProvider } from "react-helmet-async";
 import reportWebVitals from "./reportWebVitals";
 import { Provider as StoreProvider } from "react-redux";
 import App from "./App";
-import store, { RootState } from "./state/store";
-import { signLocalToken } from "./state/actions/authActions";
-import { ThunkDispatch } from "redux-thunk";
+import appStore from './store'
+import { tryToReadTokenFromLC } from "./lib/localStorage";
+import { setAuth } from "./store/Auth/Auth.reducer";
 
-(store.dispatch as ThunkDispatch<RootState, unknown, AuthActions>)(
-  signLocalToken()
-);
+const token = tryToReadTokenFromLC();
+if (token != null) appStore.dispatch(setAuth(token))
 
 ReactDOM.render(
   <React.StrictMode>
-    <StoreProvider store={store}>
+    <StoreProvider store={appStore}>
       <HelmetProvider>
         <App />
       </HelmetProvider>

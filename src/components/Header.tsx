@@ -13,12 +13,12 @@ import {
 import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 import { useHistory, Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../lib/hooks/redux.hooks";
-import { signOut } from "../state/actions/authActions";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { logout } from "../store/Auth/Auth.action";
 
 const styles = {
   header: {
-    height: '68px',
+    height: "68px",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
@@ -39,8 +39,8 @@ const styles = {
 const Header = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const isAuth = useAppSelector((state) => state.auth.isAuth);
-  const id = useAppSelector((state) => state.user.id);
+  const isAuth = useAppSelector((st) => st.auth.isAuth);
+  const id = useAppSelector((st) => st.user.id);
 
   const router = useHistory();
 
@@ -52,7 +52,7 @@ const Header = (): JSX.Element => {
     setAnchorEl(null);
   };
   return (
-    <AppBar enableColorOnDark position='static'>
+    <AppBar enableColorOnDark position="static">
       <Container sx={styles.header}>
         <MUILink component={Link} to={"/"}>
           <Typography variant="h5" component="h1" sx={styles.logo}>
@@ -65,33 +65,36 @@ const Header = (): JSX.Element => {
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={handleClick}
-              size="large">
+              size="large"
+            >
               <Avatar sx={styles.avatar}></Avatar>
             </IconButton>
-            <>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}>
-                <MenuItem
-                  onClick={() => {
-                    router.push(`/profile/${id}`), handleClose();
-                  }}>
-                  <PersonIcon />
-                  <Typography sx={styles.menuTitle}>Profile</Typography>
-                </MenuItem>
-                <Divider />
-                <MenuItem
-                  onClick={() => {
-                    dispatch(signOut()), handleClose();
-                  }}>
-                  <ExitToAppRoundedIcon />
-                  <Typography sx={styles.menuTitle}>Logout</Typography>
-                </MenuItem>
-              </Menu>
-            </>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem
+                onClick={() => {
+                  router.push(`/profile/${id}`), handleClose();
+                }}
+              >
+                <PersonIcon />
+                <Typography sx={styles.menuTitle}>Profile</Typography>
+              </MenuItem>
+              <Divider />
+              <MenuItem
+                onClick={() => {
+                  dispatch(logout());
+                  handleClose();
+                }}
+              >
+                <ExitToAppRoundedIcon />
+                <Typography sx={styles.menuTitle}>Logout</Typography>
+              </MenuItem>
+            </Menu>
           </>
         )}
       </Container>
