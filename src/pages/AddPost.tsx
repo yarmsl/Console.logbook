@@ -9,9 +9,8 @@ import {
 } from "@mui/material";
 import HelmetTitle from "../layouts/Helmet";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
-import { useAppDispatch } from "../store/hooks";
-import { addPost } from "../store/Posts/Posts.reducer";
-import { useAddPostMutation } from "../store/Posts/Posts.service";
+import { useAppDispatch } from "../store";
+import { addPost, useAddPostMutation } from "../store/Posts";
 
 const styles = {
   form: {
