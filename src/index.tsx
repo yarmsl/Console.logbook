@@ -3,20 +3,18 @@ import ReactDOM from "react-dom";
 import { HelmetProvider } from "react-helmet-async";
 import reportWebVitals from "./reportWebVitals";
 import { Provider as StoreProvider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
-import appStore from './store'
-import { tryToReadTokenFromLC } from "./lib/localStorage";
-import { setAuth } from "./store/Auth/Auth.reducer";
-
-const token = tryToReadTokenFromLC();
-if (token != null) appStore.dispatch(setAuth(token))
+import appStore, { persistor } from "./store";
 
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider store={appStore}>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </PersistGate>
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById("root")
