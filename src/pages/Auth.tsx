@@ -18,7 +18,6 @@ import { useAppDispatch } from "../store/hooks";
 import { setAuth } from "../store/Auth/Auth.reducer";
 import { setUser, setUserId } from "../store/User/User.reducer";
 import { batch } from "react-redux";
-import { setTokenToLC } from "../lib/localStorage";
 
 const styles = {
   root: {
@@ -57,7 +56,6 @@ const Auth = (): ReactElement => {
         dispatch(setAuth(token));
         dispatch(setUser({ id, avatar, name }));
       });
-      setTokenToLC(token);
     } catch (e) {
       console.log(e);
     }
@@ -70,7 +68,6 @@ const Auth = (): ReactElement => {
         dispatch(setAuth(token));
         dispatch(setUserId(id));
       });
-      setTokenToLC(token);
     } catch (e) {
       console.log(e);
     }
