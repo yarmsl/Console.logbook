@@ -21,6 +21,6 @@ services:
       - 443:443
     networks: 
       - cslb-network
-  networks:
-    cslb-network:
-      driver: bridge
+networks:
+  cslb-network:
+    driver: bridge
