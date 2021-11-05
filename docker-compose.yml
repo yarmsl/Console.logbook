@@ -10,7 +10,7 @@ services:
     ports:
       - 5000:5000
     networks: 
-      - consolelogbook_cslb_network
+      - cslb_network
   web:
     image: docker.pkg.github.com/yarmsl/console.logbook/console-logbook-front
     container_name: console-logbook-front-container
@@ -20,7 +20,7 @@ services:
       - 80:80
       - 443:443
     networks: 
-      - consolelogbook_cslb_network
+      - cslb_network
 networks:
   cslb_network:
     driver: bridge
