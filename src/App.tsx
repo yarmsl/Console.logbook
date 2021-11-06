@@ -9,7 +9,7 @@ import {
 import { BrowserRouter as Router } from "react-router-dom";
 import theme from "./UI/theme";
 import { useAppSelector, useAppDispatch } from "./store";
-import { useCheckAuthQuery } from "./store/Auth";
+import { logout, useCheckAuthQuery } from "./store/Auth";
 import { setUser } from "./store/User";
 
 const App = (): ReactElement => {
@@ -18,13 +18,16 @@ const App = (): ReactElement => {
   const id = useAppSelector((st) => st.user.id);
   const routes = useRoutes(isAuth);
   const skipQuery = useMemo(() => !token || !!id, [token, id]);
-  const { data } = useCheckAuthQuery("", { skip: skipQuery });
+  const { data, isError } = useCheckAuthQuery("", { skip: skipQuery });
 
   useEffect(() => {
     if (data) {
       dispatch(setUser(data));
     }
-  }, [data]);
+    if (isError) {
+      dispatch(logout())
+    }
+  }, [data, isError]);
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
