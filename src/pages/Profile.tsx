@@ -4,6 +4,7 @@ import {
   Button,
   Container,
   IconButton,
+  Slider,
   TextField,
 } from "@mui/material";
 import { useRef, ReactElement, useState, useCallback } from "react";
@@ -14,9 +15,10 @@ import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 
 const Profile = (): ReactElement => {
   const [photo, setPhoto] = useState<File | null>(null);
+  const [scale, setScale] = useState(1);
   const [name, setName] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
-
+  const editorRef = useRef<AvatarEditor>(null);
   const fileUpload = useCallback(() => {
     if (
       inputRef.current != null &&
@@ -29,18 +31,26 @@ const Profile = (): ReactElement => {
 
   const clear = useCallback(() => {
     setPhoto(null);
+    setScale(1);
     if (inputRef.current != null) {
       inputRef.current.files = null;
     }
   }, [inputRef, photo]);
 
+  const save = useCallback(() => {
+    const canvas = editorRef.current?.getImage();
+    console.log(canvas);
+  }, [editorRef]);
+
   return (
     <>
       <HelmetTitle title="Profile" />
+      {console.log(editorRef)}
       <Container sx={style.root}>
         <Box sx={style.avatarWrapper}>
           {photo && (
             <AvatarEditor
+              ref={editorRef}
               style={style.avatarEditor}
               width={250}
               height={250}
@@ -48,6 +58,7 @@ const Profile = (): ReactElement => {
               image={photo || "nope"}
               borderRadius={125}
               color={[255, 255, 255, 1]}
+              scale={scale}
             />
           )}
           <IconButton
@@ -56,9 +67,24 @@ const Profile = (): ReactElement => {
           >
             <Avatar sx={style.avatar}>{name ? <p>{name}</p> : null}</Avatar>
           </IconButton>
-          <IconButton onClick={clear} sx={style.clear}>
-            <HighlightOffRoundedIcon color="error" />
-          </IconButton>
+          {photo && (
+            <IconButton onClick={clear} sx={style.clear}>
+              <HighlightOffRoundedIcon color="error" />
+            </IconButton>
+          )}
+          {photo && (
+            <Slider
+              color="secondary"
+              sx={style.scale}
+              orientation="vertical"
+              value={scale}
+              onChange={(_, s) => setScale(s as number)}
+              aria-label="Scale"
+              step={0.05}
+              max={2}
+              min={1}
+            />
+          )}
           <input
             ref={inputRef}
             style={{ display: "none" }}
@@ -75,6 +101,7 @@ const Profile = (): ReactElement => {
           onChange={(e) => setName(e.target.value)}
         />
         <Button
+          onClick={save}
           variant="contained"
           color="secondary"
           endIcon={<SaveRoundedIcon />}
@@ -125,12 +152,16 @@ const style = {
   clear: {
     position: "absolute",
     top: 0,
-    right: 0,
+    left: 0,
     zIndex: 3,
   } as const,
   name: {
     width: "250px",
   },
+  scale: {
+    position: "absolute",
+    left: "260px",
+  } as const,
 };
 
 export default Profile;
