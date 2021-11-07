@@ -27,7 +27,7 @@ const Posts = (): ReactElement => {
   const dispatch = useAppDispatch();
   const { posts } = useAppSelector((st) => st.posts);
   const { data, isLoading } = useGetPostsQuery("", {
-    skip: posts.length > 0,
+    skip: posts?.length > 0,
   });
 
   useEffect(() => {
