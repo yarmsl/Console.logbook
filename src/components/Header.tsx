@@ -15,6 +15,7 @@ import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 import { useHistory, Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { logout } from "../store/Auth/Auth.action";
+import { SERVER_URL } from "../lib/constants";
 
 const styles = {
   header: {
@@ -40,7 +41,7 @@ const Header = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isAuth = useAppSelector((st) => st.auth.isAuth);
-  const id = useAppSelector((st) => st.user.id);
+  const { id, avatar, name } = useAppSelector((st) => st.user);
 
   const router = useHistory();
 
@@ -67,7 +68,12 @@ const Header = (): JSX.Element => {
               onClick={handleClick}
               size="large"
             >
-              <Avatar sx={styles.avatar}></Avatar>
+              <Avatar
+                sx={styles.avatar}
+                src={avatar ? `${SERVER_URL}/${avatar}` : undefined}
+              >
+                {name ? name.substring(0, 1) : null}
+              </Avatar>
             </IconButton>
             <Menu
               id="simple-menu"

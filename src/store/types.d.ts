@@ -19,6 +19,15 @@ interface IUser {
   avatar: string;
 }
 
+interface ISendUserDataResponse {
+  avatar: string;
+  name?: string;
+}
+
+interface ISendName {
+  name: string;
+}
+
 interface IPost {
   author: string;
   date: string;

@@ -3,7 +3,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { authReducer, authAPI } from "./Auth";
 import { postsReducer, postsAPI } from "./Posts";
-import { userReducer } from "./User";
+import { userAPI, userReducer } from "./User";
 
 const authPersistConfig = {
   key: "auth",
@@ -17,6 +17,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   [authAPI.reducerPath]: authAPI.reducer,
   [postsAPI.reducerPath]: postsAPI.reducer,
+  [userAPI.reducerPath]: userAPI.reducer
 });
 
 const appStore = configureStore({
@@ -24,7 +25,8 @@ const appStore = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(
       authAPI.middleware,
-      postsAPI.middleware
+      postsAPI.middleware,
+      userAPI.middleware
     ),
 });
 

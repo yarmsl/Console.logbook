@@ -16,10 +16,17 @@ export const userSlice = createSlice({
     setUserId(state, action: PayloadAction<string>) {
       state.id = action.payload;
     },
+    setUserAvatar(state, action: PayloadAction<string>) {
+      state.avatar = action.payload;
+    },
+    setUserName(state, action: PayloadAction<string>) {
+      state.name = action.payload;
+    },
     resetUser(state) {
       Object.assign(state, initialState);
     },
   },
 });
-export const { setUser, setUserId, resetUser } = userSlice.actions;
+export const { setUser, setUserId, setUserAvatar, setUserName, resetUser } =
+  userSlice.actions;
 export const { reducer: userReducer } = userSlice;
