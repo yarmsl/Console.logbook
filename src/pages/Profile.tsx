@@ -58,7 +58,7 @@ const Profile = (): ReactElement => {
     if (inputRef.current != null) {
       inputRef.current.files = null;
     }
-  }, [inputRef, photo]);
+  }, [inputRef]);
 
   const save = useCallback(async () => {
     const canvas = editorRef.current?.getImageScaledToCanvas();
@@ -91,7 +91,7 @@ const Profile = (): ReactElement => {
       console.error(e);
       setLoadImg(false);
     }
-  }, [editorRef, name, photo]);
+  }, [dispatch, name, photo, sendData, sendName]);
 
   return (
     <>

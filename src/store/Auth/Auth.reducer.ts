@@ -10,7 +10,8 @@ export const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     setAuth(state, action: PayloadAction<string>) {
-      (state.isAuth = true), (state.token = action.payload);
+      state.isAuth = true;
+      state.token = action.payload;
     },
     resetAuth(state) {
       Object.assign(state, initialState);

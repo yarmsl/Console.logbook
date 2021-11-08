@@ -84,7 +84,8 @@ const Header = (): JSX.Element => {
             >
               <MenuItem
                 onClick={() => {
-                  router.push(`/profile/${id}`), handleClose();
+                  router.push(`/profile/${id}`);
+                  handleClose();
                 }}
               >
                 <PersonIcon />

@@ -27,7 +27,7 @@ const App = (): ReactElement => {
     if (isError) {
       dispatch(logout())
     }
-  }, [data, isError]);
+  }, [data, dispatch, isError]);
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
