@@ -24,7 +24,7 @@ const styles = {
   },
   textfield: {
     minHeight: "250px",
-    ["& fieldset"]: {
+    "& fieldset": {
       borderTopLeftRadius: 0,
       borderTopRightRadius: 0,
     },

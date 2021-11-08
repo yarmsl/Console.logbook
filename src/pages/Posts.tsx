@@ -1,9 +1,9 @@
 import { Container, LinearProgress } from "@mui/material";
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useMemo } from "react";
 import { useHistory } from "react-router";
 import HelmetTitle from "../layouts/Helmet";
 import { useAppDispatch, useAppSelector } from "../store";
-import { setPosts, useGetPostsQuery} from "../store/Posts";
+import { setPosts, useGetPostsQuery } from "../store/Posts";
 import { FabAdd } from "../UI/FAB";
 import LogCard from "../UI/LogCard";
 
@@ -26,15 +26,18 @@ const Posts = (): ReactElement => {
   const router = useHistory();
   const dispatch = useAppDispatch();
   const { posts } = useAppSelector((st) => st.posts);
-  const { data, isLoading } = useGetPostsQuery("", {
-    skip: posts?.length > 0,
+  const skipQuery = useMemo(() => posts?.length > 0, [posts]);
+  const { data, isLoading} = useGetPostsQuery("", {
+    skip: skipQuery,
+    refetchOnMountOrArgChange: true,
   });
 
   useEffect(() => {
+    console.log('side effect')
     if (data) {
       dispatch(setPosts(data));
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <>

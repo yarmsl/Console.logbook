@@ -1,7 +1,7 @@
 import { batch } from "react-redux";
-import { resetAuth } from "./Auth.reducer";
-import { resetUser } from "../User/User.reducer";
-import { resetPosts } from "../Posts/Posts.reducer";
+import { authAPI, resetAuth } from ".";
+import { postsAPI, resetPosts } from "../Posts";
+import { userAPI, resetUser } from "../User";
 
 export const logout = () => {
   return (dispatch: (arg0: unknown) => void): void => {
@@ -9,6 +9,9 @@ export const logout = () => {
       dispatch(resetAuth());
       dispatch(resetPosts());
       dispatch(resetUser());
+      dispatch(authAPI.util.resetApiState());
+      dispatch(postsAPI.util.resetApiState());
+      dispatch(userAPI.util.resetApiState());
     });
   };
 };
