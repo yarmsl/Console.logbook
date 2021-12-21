@@ -5,12 +5,11 @@ services:
     image: docker.pkg.github.com/yarmsl/express-server/console-logbook-server:develop
     volumes:
       - cslb_volume:/app/uploads
-    container_name: console-logbook-server-container
     build:
       context: ../express-server
     restart: always
     ports:
-      - 5000:5000
+      - 5000-5005:5000
     networks: 
       - cslb_network
   web:
